@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Habit {
+  id        Int     @id @default(autoincrement())
+  name      String
+  duration  String
+  unit      String  @default("Day")
+  frequency Int     @default(1)
+  days      String  // Comma-separated days like "Monday, Wednesday, Friday"
+  color     String  @default("blue")
+  completion Int    @default(0) // Percentage 0-100
+  monthProgress Int  @default(0)
+  yearProgress  Int  @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
